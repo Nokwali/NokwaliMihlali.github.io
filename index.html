@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SAPOT Leave Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --green: #2e7d32;
+      --light-green: #e8f5e9;
+      --white: #ffffff;
+      --text: #212121;
+      --red: #c62828;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--white);
+      margin: 0;
+      color: var(--text);
+    }
+
+    header {
+      background: var(--green);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--white);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: var(--green);
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-section {
+      display: none;
+      padding: 1rem;
+      border-left: 5px solid var(--green);
+      background-color: var(--light-green);
+      margin-top: 1rem;
+      border-radius: 5px;
+    }
+
+    button {
+      background: var(--green);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1b5e20;
+    }
+
+    .btn-decline {
+      background-color: var(--red);
+    }
+
+    .btn-decline:hover {
+      background-color: #8e0000;
+    }
+
+    #confirmation {
+      display: none;
+      margin-top: 1.5rem;
+      background: #d0f0d0;
+      border: 1px solid #81c784;
+      color: var(--green);
+      padding: 1rem;
+      border-radius: 5px;
+    }
+
+    .hr-panel {
+      margin-top: 3rem;
+      border-top: 2px dashed #ccc;
+      padding-top: 2rem;
+    }
+
+    #hrSection {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .hr-actions {
+      margin-top: 1rem;
+    }
+
+    footer {
+      background: var(--green);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SAPOT Leave Application</h1>
+  <p>Select a leave type to begin your application</p>
+</header>
+
+<main>
+  <label for="leaveSelector">Choose Leave Type:</label>
+  <select id="leaveSelector">
+    <option value="">-- Select Leave Type --</option>
+    <option value="annual">Annual Leave</option>
+    <option value="sick">Sick Leave</option>
+    <option value="maternity">Maternity Leave</option>
+    <option value="paternity">Paternity Leave</option>
+    <option value="family">Family Responsibility Leave</option>
+    <option value="study">Study Leave</option>
+  </select>
+
+  <!-- Leave Application Forms -->
+  <div id="annual" class="form-section">
+    <h2>Annual Leave Application</h2>
+    <p><strong>Required:</strong> Leave form submitted 5 days in advance. Manager + HR approval needed.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Start Date:</label><input type="date" required>
+      <label>End Date:</label><input type="date" required>
+      <label>Reason:</label><textarea required></textarea>
+      <button type="submit">Apply for Annual Leave</button>
+    </form>
+  </div>
+
+  <div id="sick" class="form-section">
+    <h2>Sick Leave Application</h2>
+    <p><strong>Required:</strong> Doctor's certificate must be submitted.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Date of Illness:</label><input type="date" required>
+      <label>Upload Medical Certificate:</label><input type="file" required>
+      <label>Symptoms/Details:</label><textarea required></textarea>
+      <button type="submit">Apply for Sick Leave</button>
+    </form>
+  </div>
+
+  <div id="maternity" class="form-section">
+    <h2>Maternity Leave Application</h2>
+    <p><strong>Required:</strong> Fitness certificate + 30-day notice.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Expected Delivery Date:</label><input type="date" required>
+      <label>Start of Maternity Leave:</label><input type="date" required>
+      <label>Upload Medical Fitness Certificate:</label><input type="file" required>
+      <button type="submit">Apply for Maternity Leave</button>
+    </form>
+  </div>
+
+  <div id="paternity" class="form-section">
+    <h2>Paternity Leave Application</h2>
+    <p><strong>Required:</strong> 2 weeks prior notice + proof of birth.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Child's Date of Birth:</label><input type="date" required>
+      <label>Upload Proof of Birth:</label><input type="file" required>
+      <button type="submit">Apply for Paternity Leave</button>
+    </form>
+  </div>
+
+  <div id="family" class="form-section">
+    <h2>Family Responsibility Leave Application</h2>
+    <p><strong>Required:</strong> Relevant documents based on situation.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Type of Responsibility:</label>
+      <select required>
+        <option>Child Birth</option>
+        <option>Child Education</option>
+        <option>Bereavement</option>
+      </select>
+      <label>Date of Event:</label><input type="date" required>
+      <label>Upload Supporting Document:</label><input type="file" required>
+      <button type="submit">Apply for Family Responsibility Leave</button>
+    </form>
+  </div>
+
+  <div id="study" class="form-section">
+    <h2>Study Leave Application</h2>
+    <p><strong>Required:</strong> Registration proof, timetable, agreement form.</p>
+    <form onsubmit="return submitForm(event)">
+      <label>Full Name:</label><input type="text" required>
+      <label>Email:</label><input type="email" required>
+      <label>Institution Name:</label><input type="text" required>
+      <label>Exam/Study Dates:</label><input type="date" required>
+      <label>Upload Registration Document:</label><input type="file" required>
+      <label>Upload Timetable:</label><input type="file" required>
+      <label>Upload Signed Agreement:</label><input type="file" required>
+      <button type="submit">Apply for Study Leave</button>
+    </form>
+  </div>
+
+  <div id="confirmation">✅ Your application has been submitted!</div>
+
+  <!-- HR Panel Section -->
+  <div class="hr-panel">
+    <button onclick="toggleHRPanel()">HR Panel – Review Applications</button>
+    <div id="hrSection">
+      <h2>Pending Leave Application</h2>
+      <p><strong>Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> john.doe@example.com</p>
+      <p><strong>Leave Type:</strong> Annual Leave</p>
+      <p><strong>Dates:</strong> 2025-06-20 to 2025-06-30</p>
+      <p><strong>Reason:</strong> Family vacation</p>
+
+      <div class="hr-actions">
+        <button onclick="approveApplication()">✅ Approve</button>
+        <button class="btn-decline" onclick="declineApplication()">❌ Decline</button>
+        <textarea id="declineReason" placeholder="Reason for Decline (if any)" rows="3"></textarea>
+        <div id="hrDecisionMsg" style="margin-top:1rem;color:var(--green);font-weight:bold;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; SAPOT Program | Leave System 
+</footer>
+
+<script>
+  const selector = document.getElementById('leaveSelector');
+  const sections = document.querySelectorAll('.form-section');
+  const confirmation = document.getElementById('confirmation');
+
+  selector.addEventListener('change', function () {
+    sections.forEach(section => section.style.display = 'none');
+    confirmation.style.display = 'none';
+    const selected = document.getElementById(this.value);
+    if (selected) selected.style.display = 'block';
+  });
+
+  function submitForm(e) {
+    e.preventDefault();
+    confirmation.style.display = 'block';
+    setTimeout(() => confirmation.style.display = 'none', 5000);
+    e.target.reset();
+    return false;
+  }
+
+  function toggleHRPanel() {
+    const panel = document.getElementById('hrSection');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    document.getElementById('hrDecisionMsg').innerText = '';
+    document.getElementById('declineReason').value = '';
+  }
+
+  function approveApplication() {
+    document.getElementById('hrDecisionMsg').innerText = "✅ Application Approved.";
+  }
+
+  function declineApplication() {
+    const reason = document.getElementById('declineReason').value.trim();
+    if (reason === '') {
+      alert("Please enter a reason for declining.");
+    } else {
+      document.getElementById('hrDecisionMsg').innerText = "❌ Application Declined. Reason: " + reason;
+    }
+  }
+</script>
+
+</body>
+</html>
